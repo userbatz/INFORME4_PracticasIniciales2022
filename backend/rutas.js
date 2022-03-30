@@ -66,7 +66,34 @@ rutas.post('/usuario',(req,res)=>{
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-//CRUD DE 
+//CRUD DE PUBLICACIONES
+
+//crear una publicacion
+rutas.post('/publicaciones',(req,res)=>{
+    const {Carnet_user,Tipo,Nombre,Mensaje,Fecha}= req.body
+
+    let sql= `insert into Publicaciones(Carnet_user,Tipo,Nombre,Mensaje,Fecha) values('${Carnet_user}','${Tipo}','${Nombre}','${Mensaje}','${Fecha}')`
+    conexion.query(sql,(err,rows,fields)=>{
+        if(err) throw err;
+        else {
+            res.json({status: 'GRACIAS POR AGREGAR UNA NUEVA PUBLICACION'})
+        }
+    })
+})
+
+
+
+//MOSTRAR TODAS LAS PUBLICACIONES..
+rutas.get('/publicaciones',(req,res)=>{
+    let sql = 'select * from Publicaciones'
+    conexion.query(sql,(err,rows,fields)=>{
+        if(err) throw err;
+        else {
+            res.json(rows);
+        }
+    })
+
+})
 
 
 /* rutas.get('/', function(req,res){
